@@ -13,7 +13,7 @@ type Recipient interface {
 //
 // object represents a group chat if Title is empty.
 type User struct {
-	ID        int    `json:"id"`
+	ID        int64    `json:"id"`
 	FirstName string `json:"first_name"`
 
 	LastName string `json:"last_name"`
@@ -22,7 +22,7 @@ type User struct {
 
 // Destination is internal user ID.
 func (u User) Destination() string {
-	return strconv.Itoa(u.ID)
+	return strconv.FormatInt(u.ID, 10)
 }
 
 // Chat object represents a Telegram user, bot or group chat.
@@ -197,11 +197,10 @@ type Venue struct {
 	Location      Location `json:"location"`
 	Title         string   `json:"title"`
 	Address       string   `json:"address"`
-	Foursquare_id string   `json:"foursquare_id",omitempty`
+	Foursquare_id string   `json:"foursquare_id,omitempty"`
 }
 
-// MessageEntity
-// This object represents one special entity in a text message.
+// MessageEntity represents one special entity in a text message.
 // For example, hashtags, usernames, URLs, etc
 type MessageEntity struct {
 
@@ -218,8 +217,8 @@ type MessageEntity struct {
 	Length int `json:"length"`
 
 	//url	Optional. For “text_link” only, url that will be opened after user taps on the text
-	Url string `json:"url",omitempty`
+	Url string `json:"url,omitempty"`
 
 	//user	Optional. For “text_mention” only, the mentioned user
-	User User `json:"user",omitempty`
+	User User `json:"user,omitempty"`
 }
